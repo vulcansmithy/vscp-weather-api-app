@@ -1,6 +1,8 @@
-# app/services/weather/providers/weatherstack.rb
+# frozen_string_literal: true
+
 module Weather
   module Providers
+    # app/services/weather/providers/weatherstack.rb
     class Weatherstack < Base
       def fetch
         response = connection.get(

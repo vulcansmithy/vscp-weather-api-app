@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# WeatherSnapshot
+# app/models/weather_snapshot.rb
 class WeatherSnapshot < ApplicationRecord
   validates :city, presence: true
   validates :temperature_c, presence: true

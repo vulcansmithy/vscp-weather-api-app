@@ -1,6 +1,8 @@
-# app/services/weather/providers/base.rb
+# app/services/weather/fetch_weather_service.rb
+
 module Weather
   module Providers
+    # app/services/weather/providers/base.rb
     class Base
       def connection
         Faraday.new do |f|

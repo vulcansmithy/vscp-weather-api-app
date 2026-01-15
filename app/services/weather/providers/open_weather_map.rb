@@ -1,6 +1,8 @@
-# app/services/weather/providers/open_weather_map.rb
+# frozen_string_literal: true
+
 module Weather
   module Providers
+    # app/services/weather/providers/open_weather_map.rb
     class OpenWeatherMap < Base
       def fetch
         response = connection.get(

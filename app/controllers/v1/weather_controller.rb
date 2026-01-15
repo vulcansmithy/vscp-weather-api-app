@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'ostruct'
 
-# app/controllers/v1/weather_controller.rb
 module V1
+  # app/controllers/v1/weather_controller.rb
   class WeatherController < ApplicationController
     def show
       data = Weather::FetchWeatherService.new.call

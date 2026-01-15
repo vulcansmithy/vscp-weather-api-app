@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   ) do
     get '/weather', to: 'weather#show'
   end
-  
+
   get 'up' => 'rails/health#show', as: :rails_health_check
 end

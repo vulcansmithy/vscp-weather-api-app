@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 # spec/services/weather/fetch_weather_service_spec.rb

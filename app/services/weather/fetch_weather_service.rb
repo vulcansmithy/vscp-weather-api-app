@@ -1,5 +1,7 @@
-# app/services/weather/fetch_weather_service.rb
+# frozen_string_literal: true
+
 module Weather
+  # app/services/weather/fetch_weather_service.rb
   class FetchWeatherService
     CITY = 'melbourne'
     CACHE_KEY = 'weather:melbourne'
