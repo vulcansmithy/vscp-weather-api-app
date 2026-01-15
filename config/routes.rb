@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
+# config/routes.rb
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  api_version(
+    module: 'V1',
+    path: { value: 'v1' },
+    header: { name: 'Accept', value: 'application/vnd.weather.v1+json' },
+    parameter: { name: 'version', value: '1' },
+    default: true
+  ) do
+    get '/weather', to: 'weather#show'
+  end
+  
   get 'up' => 'rails/health#show', as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
