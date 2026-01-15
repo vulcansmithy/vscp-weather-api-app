@@ -1,0 +1,13 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.4
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+    - bin/**/*
+
+Layout/LineLength:
+  Max: 240
