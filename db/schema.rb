@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_15_090354) do
     t.integer "wind_speed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city"], name: "index_weather_snapshots_on_city", unique: true
   end
 
 end
