@@ -6,22 +6,26 @@ require 'rails_helper'
 RSpec.describe 'Weather API', type: :request do
   let(:service) { instance_double(Weather::FetchWeatherService) }
 
-  it 'returns weather payload', :aggregate_failures do
+  let(:service_response) do
+    {
+      temperature_degrees: 29,
+      wind_speed: 20
+    }
+  end
+
+  before do
     allow(Weather::FetchWeatherService)
       .to receive(:new)
       .and_return(service)
 
     allow(service)
       .to receive(:call)
-      .and_return(
-        {
-          temperature_degrees: 29,
-          wind_speed: 20
-        }
-      )
+      .and_return(service_response)
 
     get '/v1/weather'
+  end
 
+  it 'returns weather payload', :aggregate_failures do
     expect(response).to have_http_status(:ok)
 
     body = response.parsed_body
