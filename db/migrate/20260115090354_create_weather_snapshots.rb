@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# CreateWeatherSnapshots
 class CreateWeatherSnapshots < ActiveRecord::Migration[7.1]
   def change
     create_table :weather_snapshots do |t|
