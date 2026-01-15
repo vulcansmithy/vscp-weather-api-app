@@ -1,4 +1,3 @@
-# app/services/fetch_weather_service.rb
 class FetchWeatherService
   CITY = 'melbourne'
   CACHE_KEY = 'weather:melbourne'

@@ -1,4 +1,3 @@
-# app/services/weatherstack.rb
 class Weatherstack < Base
   def fetch
     response = connection.get(

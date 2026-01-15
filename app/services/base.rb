@@ -1,4 +1,3 @@
-# app/services/base.rb
 class Base
   def connection
     Faraday.new do |f|

@@ -1,4 +1,3 @@
-# app/services/open_weather_map.rb
 class OpenWeatherMap < Base
   def fetch
     response = connection.get(
