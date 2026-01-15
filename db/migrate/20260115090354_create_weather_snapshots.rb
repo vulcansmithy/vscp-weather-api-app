@@ -10,5 +10,7 @@ class CreateWeatherSnapshots < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+
+    add_index :weather_snapshots, :city, unique: true
   end
 end
