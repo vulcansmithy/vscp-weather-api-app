@@ -11,3 +11,6 @@ gem 'versionist', '~> 2.0.1'
 # HTTP client
 gem 'faraday', '~> 2.14.0'
 gem 'faraday-retry', '~> 2.4.0'
+
+# Serialization
+gem 'jsonapi-serializer','~> 2.2.0'
