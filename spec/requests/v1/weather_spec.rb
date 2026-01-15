@@ -1,7 +1,14 @@
-require 'rails_helper'
+# spec/requests/weather_spec.rb
+RSpec.describe 'Weather API', type: :request do
+  it 'returns weather payload' do
+    allow_any_instance_of(Weather::FetchWeatherService)
+      .to receive(:call)
+      .and_return({ temperature_degrees: 29, wind_speed: 20 })
 
-RSpec.describe "V1::Weathers", type: :request do
-  describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+    get '/v1/weather'
+
+    expect(response).to have_http_status(:ok)
+    body = JSON.parse(response.body)
+    expect(body.dig('data', 'attributes', 'wind_speed')).to eq(20)
   end
 end
