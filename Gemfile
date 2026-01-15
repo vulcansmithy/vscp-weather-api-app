@@ -17,3 +17,10 @@ gem 'jsonapi-serializer','~> 2.2.0'
 
 # Environment variables
 gem 'dotenv-rails', '~> 3.2.0', groups: %i[development test]
+
+# Testing
+group :development, :test do
+  gem 'rspec-rails', '~> 7.1.1'
+end
+
+gem 'bootsnap', require: false
