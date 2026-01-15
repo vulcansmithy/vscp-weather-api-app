@@ -1,8 +1,8 @@
 # app/services/weather/fetch_weather_service.rb
 module Weather
   class FetchWeatherService
-    CITY = "melbourne"
-    CACHE_KEY = "weather:melbourne"
+    CITY = 'melbourne'
+    CACHE_KEY = 'weather:melbourne'
     CACHE_TTL = 3.seconds
 
     PROVIDERS = [
@@ -27,7 +27,7 @@ module Weather
         result = provider.new.fetch
         return result if result
       end
-      raise "All providers failed"
+      raise 'All providers failed'
     end
 
     def persist(data)
@@ -44,7 +44,7 @@ module Weather
 
     def fetch_from_database
       snapshot = WeatherSnapshot.find_by(city: CITY)
-      raise "No cached data available" unless snapshot
+      raise 'No cached data available' unless snapshot
 
       {
         temperature_degrees: snapshot.temperature_c,

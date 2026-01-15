@@ -2,7 +2,7 @@ require 'rails_helper'
 
 # spec/services/weather/fetch_weather_service_spec.rb
 RSpec.describe Weather::FetchWeatherService do
-  it "returns unified weather data" do
+  it 'returns unified weather data' do
     allow_any_instance_of(Weather::Providers::Weatherstack)
       .to receive(:fetch)
       .and_return({ temperature_degrees: 29, wind_speed: 20 })
