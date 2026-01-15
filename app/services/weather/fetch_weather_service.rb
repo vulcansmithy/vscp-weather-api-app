@@ -33,15 +33,13 @@ module Weather
     end
 
     def persist(data)
-      WeatherSnapshot.upsert(
-        {
-          city: CITY,
-          temperature_c: data[:temperature_degrees],
-          wind_speed: data[:wind_speed],
-          updated_at: Time.current
-        },
-        unique_by: :city
+      snapshot = WeatherSnapshot.find_or_initialize_by(city: CITY)
+      snapshot.assign_attributes(
+        temperature_c: data[:temperature_degrees],
+        wind_speed: data[:wind_speed],
+        updated_at: Time.current
       )
+      snapshot.save! # raises if validation fails
     end
 
     def fetch_from_database
