@@ -8,6 +8,7 @@ AllCops:
   Exclude:
     - db/schema.rb
     - bin/**/*
+    - Gemfile
 
 Layout/LineLength:
   Max: 240
