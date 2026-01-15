@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '3.1.3'
 
+gem 'puma'
+
 gem 'rails', '~> 7.1.0'
 gem 'sqlite3'
 
