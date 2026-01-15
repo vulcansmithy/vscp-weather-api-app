@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 # spec/services/weather/fetch_weather_service_spec.rb
 RSpec.describe Weather::FetchWeatherService do
   it "returns unified weather data" do
