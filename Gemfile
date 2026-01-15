@@ -14,3 +14,6 @@ gem 'faraday-retry', '~> 2.4.0'
 
 # Serialization
 gem 'jsonapi-serializer','~> 2.2.0'
+
+# Environment variables
+gem 'dotenv-rails', '~> 3.2.0', groups: %i[development test]
