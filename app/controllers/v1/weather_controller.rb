@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
-require 'ostruct'
-
 module V1
   # app/controllers/v1/weather_controller.rb
   class WeatherController < ApplicationController
+    WeatherData = Struct.new(:temperature_degrees, :wind_speed, keyword_init: true)
+
     def show
       data = Weather::FetchWeatherService.new.call
-      render json: WeatherSerializer.new(OpenStruct.new(data)).serializable_hash
+      weather = WeatherData.new(data)
+      render json: WeatherSerializer.new(weather).serializable_hash
     end
   end
 end
