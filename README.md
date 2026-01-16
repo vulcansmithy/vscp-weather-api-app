@@ -135,17 +135,19 @@ bundle exec rubocop
 
 1. Redis instead of memory cache. Right now cache are saved in SQLite. This is done for quick development. Similiar strategy for coming up with PoC (Proof-Of-Concept) app. For production ready app, the ideal strategy is to use a NoSQL database like Redis.
 
-2. Implement a circuit breaker pattern per Provider to protect the service from calling failing or slow third-party service, e.g., Weatherstack and OpenWeatherMap
+2. Implement a circuit breaker pattern per Provider to protect the service from calling failing or slow third-party service, e.g., Weatherstack and OpenWeatherMap.
 
-4. Rate limiting with Rack::Attack
+3. Enable or implement a rate limiting mechanism using Rack::Attack. This will prevent API endpoint being abused, e.g., DDoS attach, scraping, etc. It also protect the web service of unecesasry calls to third-party API endpoints that the web services uses, e.g., Weatherstack or OpenWeatherMap.
 
-5. API authentication
+4. Implement a form of API authentication. By implementing this we can determine who using the API endpoint. 
 
-6. Dockerizing deployment and  CI/CD
+5. Dockerizing the web service for easy development and deployment.
 
-7. Multi-city support
+6. Integrate the web service into a CI/CD workflow. This would easy the transition from development to deploying tested and reviewed implemented features.
 
-8. API documentation (OpenAPI)
+7. Implement a multi-city support. Right now this version works for the city of Melbourne. Expanding this feature would be make this web service very useful of other user that may need getting weather information for other cities aside from the city of Melbourne.
+
+8. Implement a API documentation using OpenAPI/Swagger.
 
    
 
