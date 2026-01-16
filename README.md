@@ -99,6 +99,8 @@ curl "http://localhost:3000/weather?city=melbourne"
 
 ## Testing
 
+To run the `rspec` test
+
 ```bash
 bundle exec rspec
 ```
@@ -106,6 +108,8 @@ bundle exec rspec
 
 
 ## Linting
+
+To enforce coding standard, this Service app is using `rubocop`. To run `rubocop`
 
 ```bash
 bundle exec rubocop
