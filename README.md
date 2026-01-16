@@ -133,11 +133,9 @@ bundle exec rubocop
 
 ## Future Improvements
 
-1. Redis instead of memory cache
+1. Redis instead of memory cache. Right now cache are saved in SQLite. This is done for quick development. Similiar strategy for coming up with PoC (Proof-Of-Concept) app. For production ready app, the ideal strategy is to use a NoSQL database like Redis.
 
-2. Circuit breaker per provider
-
-3. Background refresh via Sidekiq
+2. Implement a circuit breaker pattern per Provider to protect the service from calling failing or slow third-party service, e.g., Weatherstack and OpenWeatherMap
 
 4. Rate limiting with Rack::Attack
 
