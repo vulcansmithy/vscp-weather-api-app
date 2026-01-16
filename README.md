@@ -56,6 +56,8 @@ information for Melbourne with provider failover and caching.
 
 ## Running the app locally
 
+To run the rails server locally
+
 ```bash
 rails server
 ```
@@ -63,6 +65,8 @@ rails server
 
 
 ## Calling the API
+
+
 
 ```bash
 curl "http://localhost:3000/v1/weather?city=melbourne"
