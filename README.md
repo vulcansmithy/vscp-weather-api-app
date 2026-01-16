@@ -1,8 +1,8 @@
 
 
-# Weather API (Rails 7.1)
+# Weather RESTful API (Rails 7.1)
 
-A production-grade, API-only Rails application that returns current weather
+This is a  API-only Rails application that returns current weather
 information for Melbourne with provider failover and caching.
 
 ## Requirements
@@ -131,7 +131,7 @@ bundle exec rubocop
 
   
 
-## Future Improvements
+## Future improvements
 
 1. Redis instead of memory cache. Right now cache are saved in SQLite. This is done for quick development. Similiar strategy for coming up with PoC (Proof-Of-Concept) app. For production ready app, the ideal strategy is to use a NoSQL database like Redis.
 
