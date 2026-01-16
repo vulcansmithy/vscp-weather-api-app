@@ -7,7 +7,7 @@ information for Melbourne with provider failover and caching.
 
 ## Requirements
 
-- Ruby 3.4.2
+- Ruby 3.1.3
 - Rails 7.1
 - SQLite
 - Weatherstack API key
