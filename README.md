@@ -15,11 +15,42 @@ information for Melbourne with provider failover and caching.
 
 ## Setting up the app locally
 
-- git clone <repo>
-- cd weather_api
-- bundle install
-- cp .env.example .env
-- rails db:create db:migrate
+1. git clone the repo
+   ```bash
+   git clone git@github.com:vulcansmithy/vscp-weather-api-app.git
+   ```
+
+2. do a `cd` to `weather_api` folder
+
+   ```bash
+   cd weather_api
+   ```
+
+3. do a `bundle install`
+
+   ```
+   bundle install
+   ```
+
+4. copy the file env.example to .env
+
+   ```
+   cp env.example .env
+   ```
+
+5. edit `.env` file and add the appriopriate the `WEATHERSTACK_API_KEY` and `OPENWEATHER_API_KEY`
+
+   ```bash
+   WEATHERSTACK_API_KEY=[insert API Key here..]
+   OPENWEATHER_API_KEY=[insert API Key here..]
+   ```
+
+6. initialize the corresponding database (used for caching)
+
+   ``` bash
+   rails db:create
+   rails db:migrate
+   ```
 
 
 
@@ -100,5 +131,4 @@ bundle exec rubocop
 8. API documentation (OpenAPI)
 
    
-
 
