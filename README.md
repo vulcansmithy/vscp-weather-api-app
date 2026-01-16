@@ -1,3 +1,5 @@
+
+
 # Weather API (Rails 7.1)
 
 A production-grade, API-only Rails application that returns current weather
@@ -64,22 +66,31 @@ rails server
 
 
 
-## Calling the API
+## Calling the API Endpoint
 
+Since the API endpoint for this web service is properly versioned using the following versioning strategies
 
+- **Path Strategy**, This strategy uses a URL path prefix to request a specific version of your API.
+- **Request Parameter Strategy**. This strategy uses a request parameter to request a specific version of your API.
+- **HTTP Header**. This strategy uses an HTTP header to request a specific version of your API.
+- **Default Version Strategy**. If a request is made to your API without specifying a specific version, by default a RoutingError (i.e. 404) will occur. You can optionally configure Versionist to return a specific version by default when none is specified. To specify that a version should be used as the default, include `:default => true` in the config hash passed to the `api_version` method
+
+Calling the API endpoint using Path Strategy
 
 ```bash
 curl "http://localhost:3000/v1/weather?city=melbourne"
 ```
 
+Calling the API endpoint using Request Parameter
 ```bash
 curl "http://localhost:3000/weather?city=melbourne&version=1"
 ```
 
+Calling the API endpoint using HTTP Header
 ```bash
 curl -H "Accept: application/vnd.weather.v1+json" "http://localhost:3000/weather?city=melbourne"
 ```
-
+Calling the API endpoint using the Default Version
 ```bash
 curl "http://localhost:3000/weather?city=melbourne"
 ```
