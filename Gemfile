@@ -7,6 +7,8 @@ gem 'puma'
 gem 'rails', '~> 7.1.0'
 gem 'sqlite3'
 
+gem 'redis', '~> 5.4.1'
+
 # API versioning
 gem 'versionist', '~> 2.0.1'
 
