@@ -1,34 +1,60 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'swagger_helper'
 
 # spec/requests/weather_spec.rb
 RSpec.describe 'Weather API', type: :request do
-  let(:service) { instance_double(Weather::FetchWeatherService) }
+  path '/v1/weather' do
+    get 'Fetch current weather' do
+      tags 'Weather'
+      produces 'application/json'
 
-  let(:service_response) do
-    {
-      temperature_degrees: 29,
-      wind_speed: 20
-    }
-  end
+      response '200', 'weather fetched successfully' do
+        schema '$ref' => '#/components/schemas/WeatherResponse'
 
-  before do
-    allow(Weather::FetchWeatherService)
-      .to receive(:new)
-      .and_return(service)
+        example 'application/json', :success, {
+          data: {
+            id: 'melbourne',
+            type: 'weather',
+            attributes: {
+              temperature_degrees: 29,
+              wind_speed: 20
+            }
+          }
+        }
 
-    allow(service)
-      .to receive(:call)
-      .and_return(service_response)
+        let(:service) { instance_double(Weather::FetchWeatherService) }
 
-    get '/v1/weather'
-  end
+        before do
+          allow(Weather::FetchWeatherService)
+            .to receive(:new)
+            .and_return(service)
 
-  it 'returns weather payload', :aggregate_failures do
-    expect(response).to have_http_status(:ok)
+          allow(service)
+            .to receive(:call)
+            .and_return(
+              temperature_degrees: 29,
+              wind_speed: 20
+            )
+        end
 
-    body = response.parsed_body
-    expect(body.dig('data', 'attributes', 'wind_speed')).to eq(20)
+        run_test!
+      end
+
+      response '500', 'internal server error' do
+        example 'application/json', :error, {
+          error: 'Internal Server Error'
+        }
+
+        before do
+          allow(Weather::FetchWeatherService)
+            .to receive(:new)
+            .and_raise(StandardError)
+        end
+
+        run_test!
+      end
+    end
   end
 end

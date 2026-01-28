@@ -25,6 +25,7 @@ gem 'dotenv-rails', '~> 3.2.0', groups: %i[development test]
 # Testing
 group :development, :test do
   gem 'rspec-rails', '~> 7.1.1'
+   gem 'rswag', '~> 2.17.0'
 end
 
 gem 'bootsnap', require: false

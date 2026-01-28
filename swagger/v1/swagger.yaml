@@ -1,0 +1,65 @@
+---
+openapi: 3.0.1
+info:
+  title: Weather API
+  version: v1
+  description: Weather API – Version 1
+paths:
+  "/v1/weather":
+    get:
+      summary: Fetch current weather
+      tags:
+      - Weather
+      responses:
+        '200':
+          description: weather fetched successfully
+          content:
+            application/json:
+              examples:
+                success:
+                  value:
+                    data:
+                      id: melbourne
+                      type: weather
+                      attributes:
+                        temperature_degrees: 29
+                        wind_speed: 20
+              schema:
+                "$ref": "#/components/schemas/WeatherResponse"
+        '500':
+          description: internal server error
+          content:
+            application/json:
+              examples:
+                error:
+                  value:
+                    error: Internal Server Error
+servers:
+- url: http://localhost:3000
+  description: Local
+components:
+  schemas:
+    WeatherResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: melbourne
+            type:
+              type: string
+              example: weather
+            attributes:
+              type: object
+              properties:
+                temperature_degrees:
+                  type: integer
+                  example: 29
+                wind_speed:
+                  type: integer
+                  example: 20
+              required:
+              - temperature_degrees
+              - wind_speed
