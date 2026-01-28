@@ -12,6 +12,10 @@ module Weather
       Weather::Providers::OpenWeatherMap
     ].freeze
 
+    def initialize(snapshot_store: SnapshotStore.new)
+      @snapshot_store = snapshot_store
+    end
+
     def call
       Rails.cache.fetch(CACHE_KEY, expires_in: CACHE_TTL) do
         data = fetch_from_providers
@@ -19,37 +23,42 @@ module Weather
         data
       end
     rescue StandardError
-      fetch_from_database
+      fetch_from_redis
     end
 
     private
 
+    attr_reader :snapshot_store
+
     def fetch_from_providers
       PROVIDERS.each do |provider|
         result = provider.new.fetch
-        return result if result
+        return result if valid_payload?(result)
       end
       raise 'All providers failed'
     end
 
     def persist(data)
-      snapshot = WeatherSnapshot.find_or_initialize_by(city: CITY)
-      snapshot.assign_attributes(
-        temperature_c: data[:temperature_degrees],
-        wind_speed: data[:wind_speed],
-        updated_at: Time.current
+      snapshot_store.write(
+        city: CITY,
+        data: {
+          temperature_degrees: data[:temperature_degrees],
+          wind_speed: data[:wind_speed]
+        }
       )
-      snapshot.save! # raises if validation fails
     end
 
-    def fetch_from_database
-      snapshot = WeatherSnapshot.find_by(city: CITY)
-      raise 'No cached data available' unless snapshot
+    def fetch_from_redis
+      data = snapshot_store.read(city: CITY)
+      raise 'No cached data available' unless data
 
-      {
-        temperature_degrees: snapshot.temperature_c,
-        wind_speed: snapshot.wind_speed
-      }
+      data.slice(:temperature_degrees, :wind_speed)
+    end
+
+    def valid_payload?(data)
+      data.is_a?(Hash) &&
+        data[:temperature_degrees].present? &&
+        data[:wind_speed].present?
     end
   end
 end
