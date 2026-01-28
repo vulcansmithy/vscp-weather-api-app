@@ -2,29 +2,37 @@
 
 require 'rails_helper'
 
-# spec/services/weather/fetch_weather_service_spec.rb
+# `spec/services/weather/fetch_weather_service_spec.rb`
 RSpec.describe Weather::FetchWeatherService do
-  let(:provider) { instance_double(Weather::Providers::Weatherstack) }
+  let(:store) { instance_double(Weather::SnapshotStore) }
+  let(:service) { described_class.new(snapshot_store: store) }
 
-  before do
-    allow(Weather::Providers::Weatherstack)
-      .to receive(:new)
-      .and_return(provider)
-
-    allow(provider)
-      .to receive(:fetch)
-      .and_return(
-        {
-          temperature_degrees: 29,
-          wind_speed: 20
-        }
-      )
+  let(:payload) do
+    { temperature_degrees: 20, wind_speed: 5 }
   end
 
-  it 'returns unified weather data', :aggregate_failures do
-    result = described_class.new.call
+  before do
+    allow_any_instance_of(
+      Weather::Providers::Weatherstack
+    ).to receive(:fetch).and_return(payload)
 
-    expect(result[:temperature_degrees]).to eq(29)
-    expect(result[:wind_speed]).to eq(20)
+    allow(store).to receive(:write)
+    allow(store).to receive(:read).and_return(payload)
+  end
+
+  it 'returns weather data from provider' do
+    expect(service.call).to eq(payload)
+  end
+
+  it 'falls back to redis on failure' do
+    allow_any_instance_of(
+      Weather::Providers::Weatherstack
+    ).to receive(:fetch).and_return(nil)
+
+    allow_any_instance_of(
+      Weather::Providers::OpenWeatherMap
+    ).to receive(:fetch).and_return(nil)
+
+    expect(service.call).to eq(payload)
   end
 end

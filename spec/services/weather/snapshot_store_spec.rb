@@ -4,7 +4,7 @@ require 'rails_helper'
 
 # spec/services/weather/snapshot_store_spec.rb
 RSpec.describe Weather::SnapshotStore do
-  let(:redis) { Redis.new }
+  let(:redis) { Rails.application.config.redis }
   let(:store) { described_class.new(redis: redis) }
   let(:city) { 'melbourne' }
   let(:data) { { temperature_degrees: 22, wind_speed: 10 } }
