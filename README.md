@@ -54,9 +54,27 @@ information for Melbourne with provider failover and caching.
    rails db:migrate
    ```
 
+7. install `redis` using `homebrew` (for the MacOS Platform)
 
+   ```bash
+   brew install redis
+   ```
+
+   
 
 ## Running the app locally
+
+Run the `Redis`
+
+```bash
+brew services start redis
+```
+
+Additional, if you need to stop `redis` server
+
+```bash
+brew services stop redis
+```
 
 To run the rails server locally
 
@@ -133,7 +151,7 @@ bundle exec rubocop
 
 ## Future improvements
 
-1. Redis instead of memory cache. Right now cache are saved in SQLite. This is done for quick development. Similiar strategy for coming up with PoC (Proof-Of-Concept) app. For production ready app, the ideal strategy is to use a NoSQL database like Redis.
+1. ~~Redis instead of memory cache. Right now cache are saved in SQLite. This is done for quick development. Similiar strategy for coming up with PoC (Proof-Of-Concept) app. For production ready app, the ideal strategy is to use a NoSQL database like Redis.~~
 
 2. Implement a circuit breaker pattern per Provider to protect the service from calling failing or slow third-party service, e.g., Weatherstack and OpenWeatherMap.
 
