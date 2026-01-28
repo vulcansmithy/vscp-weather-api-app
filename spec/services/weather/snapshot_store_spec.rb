@@ -12,12 +12,11 @@ RSpec.describe Weather::SnapshotStore do
   before { redis.flushdb }
 
   describe '#write and #read' do
-    it 'stores and retrieves weather data' do
+    it 'store retrieves weather data' do
       store.write(city: city, data: data, ttl: 5)
       result = store.read(city: city)
 
-      expect(result[:temperature_degrees]).to eq(22)
-      expect(result[:wind_speed]).to eq(10)
+      expect_weather_data(result)
     end
 
     it 'expires data after TTL' do
@@ -25,6 +24,11 @@ RSpec.describe Weather::SnapshotStore do
       sleep 2
 
       expect(store.read(city: city)).to be_nil
+    end
+
+    def expect_weather_data(result)
+      expect(result[:temperature_degrees]).to eq(22)
+      expect(result[:wind_speed]).to eq(10)
     end
   end
 end
