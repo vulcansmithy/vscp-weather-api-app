@@ -7,14 +7,24 @@ RSpec.describe Weather::FetchWeatherService do
   let(:store) { instance_double(Weather::SnapshotStore) }
   let(:service) { described_class.new(snapshot_store: store) }
 
+  let(:weatherstack) { instance_double(Weather::Providers::Weatherstack) }
+  let(:open_weather) { instance_double(Weather::Providers::OpenWeatherMap) }
+
   let(:payload) do
     { temperature_degrees: 20, wind_speed: 5 }
   end
 
   before do
-    allow_any_instance_of(
-      Weather::Providers::Weatherstack
-    ).to receive(:fetch).and_return(payload)
+    allow(Weather::Providers::Weatherstack)
+      .to receive(:new)
+      .and_return(weatherstack)
+
+    allow(Weather::Providers::OpenWeatherMap)
+      .to receive(:new)
+      .and_return(open_weather)
+
+    allow(weatherstack).to receive(:fetch).and_return(payload)
+    allow(open_weather).to receive(:fetch).and_return(nil)
 
     allow(store).to receive(:write)
     allow(store).to receive(:read).and_return(payload)
@@ -25,13 +35,8 @@ RSpec.describe Weather::FetchWeatherService do
   end
 
   it 'falls back to redis on failure' do
-    allow_any_instance_of(
-      Weather::Providers::Weatherstack
-    ).to receive(:fetch).and_return(nil)
-
-    allow_any_instance_of(
-      Weather::Providers::OpenWeatherMap
-    ).to receive(:fetch).and_return(nil)
+    allow(weatherstack).to receive(:fetch).and_return(nil)
+    allow(open_weather).to receive(:fetch).and_return(nil)
 
     expect(service.call).to eq(payload)
   end
