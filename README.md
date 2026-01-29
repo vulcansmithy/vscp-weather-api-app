@@ -135,6 +135,20 @@ bundle exec rubocop
 
 
 
+## Documentation
+
+To generate swagger file
+```bash
+bundle exec rake rswag:specs:swaggerize
+```
+
+To view the API documentation, make sure the rails server is running, then go this local URL
+```
+http://localhost:3000/api-docs
+```
+
+
+
 ## Design decisions
 
 * Service Objects for domain logic
@@ -165,7 +179,7 @@ bundle exec rubocop
 
 7. Implement a multi-city support. Right now this version works for the city of Melbourne. Expanding this feature would be make this web service very useful of other user that may need getting weather information for other cities aside from the city of Melbourne.
 
-8. Implement a API documentation using OpenAPI/Swagger.
+8. ~~Implement a API documentation using OpenAPI/Swagger~~.
 
    
 
