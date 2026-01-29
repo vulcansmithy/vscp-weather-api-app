@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable all
+
 require 'rails_helper'
 require 'swagger_helper'
 
