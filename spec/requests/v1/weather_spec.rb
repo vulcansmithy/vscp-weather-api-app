@@ -7,7 +7,6 @@ require 'swagger_helper'
 
 # spec/requests/weather_spec.rb
 RSpec.describe 'Weather API', type: :request do
-  # rubocop:disable Layout/IndentationConsistency
   path '/v1/weather' do
     get 'Fetch current weather' do
       tags 'Weather'
@@ -60,5 +59,5 @@ RSpec.describe 'Weather API', type: :request do
       end
     end
   end
-  # rubocop:enable Layout/IndentationConsistency
 end
+
