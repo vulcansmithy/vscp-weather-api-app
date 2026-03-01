@@ -5,7 +5,7 @@ ruby '3.3.0'
 gem 'puma'
 
 gem 'rails', '~> 7.1.0'
-gem 'sqlite3'
+gem 'pg', '~> 1.5'
 
 gem 'redis', '~> 5.4.1'
 

@@ -7,9 +7,10 @@ information for Melbourne with provider failover and caching.
 
 ## Requirements
 
-- Ruby 3.1.3
+- Ruby 3.3.0
 - Rails 7.1
-- SQLite
+- PostgreSQL
+- Redis
 - Weatherstack API key
 - OpenWeatherMap API key
 
@@ -28,33 +29,35 @@ information for Melbourne with provider failover and caching.
    cd weather_api
    ```
 
-3. do a `bundle install`
+3. Install PostgreSQL (e.g. on macOS: `brew install postgresql@16` and start with `brew services start postgresql@16`).
+
+4. do a `bundle install`
 
    ```
    bundle install
    ```
 
-4. copy the file env.example to .env
+5. copy the file env.example to .env
 
    ```
    cp env.example .env
    ```
 
-5. edit `.env` file and add the appriopriate the `WEATHERSTACK_API_KEY` and `OPENWEATHER_API_KEY`
+6. edit `.env` file and add the appropriate `WEATHERSTACK_API_KEY` and `OPENWEATHER_API_KEY`
 
    ```bash
    WEATHERSTACK_API_KEY=[insert API Key here..]
    OPENWEATHER_API_KEY=[insert API Key here..]
    ```
 
-6. initialize the corresponding database (used for caching)
+7. create and migrate the PostgreSQL database (used for caching)
 
-   ``` bash
+   ```bash
    rails db:create
    rails db:migrate
    ```
 
-7. install `redis` using `homebrew` (for the MacOS Platform)
+8. install `redis` using `homebrew` (for the macOS platform)
 
    ```bash
    brew install redis

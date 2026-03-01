@@ -10,14 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_15_090354) do
-  create_table "weather_snapshots", force: :cascade do |t|
-    t.string "city"
-    t.integer "temperature_c"
-    t.integer "wind_speed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["city"], name: "index_weather_snapshots_on_city", unique: true
-  end
+ActiveRecord::Schema[7.1].define(version: 0) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
 end
